@@ -1,0 +1,21 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  dnscontrol:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: DNSControl push
+        uses: koenrh/dnscontrol-action@v3
+        env:
+          OVH_APP_KEY: ${{ secrets.OVH_APP_KEY }}
+          OVH_APP_SECRET_KEY: ${{ secrets.OVH_APP_SECRET_KEY }}
+          OVH_APP_CONSUMER_KEY: ${{ secrets.OVH_APP_CONSUMER_KEY }}
+        with:
+          args: push
