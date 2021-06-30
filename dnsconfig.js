@@ -11,7 +11,14 @@ var MAILSERVER_CONFIG = [
     MX('@', 1, 'mx1.mail.ovh.net.'),
     MX('@', 5, 'mx2.mail.ovh.net.'),
     MX('@', 100, 'mx3.mail.ovh.net.'),
-    TXT('@', 'v=spf1 include:mx.ovh.com ~all') // SPF
+    SPF_BUILDER({
+        label: '@',
+        parts: [
+            'v=spf1',
+            'include:mx.ovh.com',
+            '~all'
+        ]
+    })
 ];
 
 // Defaults
@@ -26,6 +33,7 @@ D('arbre.app', REG_OVH, DnsProvider(OVH),
     CNAME('www', '@'),
     A('insee', WEBSERVER_IPV4), // API
     A('mon', WEBSERVER_IPV4), // SPA
+    A('docs', WEBSERVER_IPV4), // Generated files
 
     // E-mails
     MAILSERVER_CONFIG,
