@@ -33,8 +33,8 @@ D('arbre.app', REG_OVH, DnsProvider(OVH),
     A('@', WEBSERVER_OLD_IPV4), // Main site
     CNAME('www', '@'),
     A('insee', WEBSERVER_OLD_IPV4), // API
-    A('mon', WEBSERVER_OLD_IPV4), // SPA
-    A('docs', WEBSERVER_OLD_IPV4), // Generated files
+    A('mon', WEBSERVER_IPV4), // SPA
+    A('docs', WEBSERVER_IPV4), // Generated files
 
     // E-mails
     MAILSERVER_CONFIG,
