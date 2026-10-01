@@ -5,7 +5,8 @@ var OVH = NewDnsProvider('ovh', 'OVH');
 
 // Common configurations
 
-var WEBSERVER_IPV4 = '51.77.136.165';
+var WEBSERVER_IPV4 = '145.239.198.62';
+var WEBSERVER_OLD_IPV4 = '51.77.136.165';
 
 var MAILSERVER_CONFIG = [
     MX('@', 1, 'mx1.mail.ovh.net.'),
@@ -16,7 +17,7 @@ var MAILSERVER_CONFIG = [
         parts: [
             'v=spf1',
             'include:mx.ovh.com',
-            '~all'
+            '-all'
         ]
     })
 ];
@@ -29,16 +30,19 @@ DEFAULTS(DefaultTTL('1h'), NAMESERVER_TTL('1h'));
 
 D('arbre.app', REG_OVH, DnsProvider(OVH),
     // Web
-    A('@', WEBSERVER_IPV4), // Main site
+    A('@', WEBSERVER_OLD_IPV4), // Main site
     CNAME('www', '@'),
-    A('insee', WEBSERVER_IPV4), // API
-    A('mon', WEBSERVER_IPV4), // SPA
-    A('docs', WEBSERVER_IPV4), // Generated files
+    A('insee', WEBSERVER_OLD_IPV4), // API
+    A('mon', WEBSERVER_OLD_IPV4), // SPA
+    A('docs', WEBSERVER_OLD_IPV4), // Generated files
 
     // E-mails
     MAILSERVER_CONFIG,
 
     // Domain verification
     TXT('@', 'google-site-verification=puDIPKS7zzfTDbPwv3lMxp8b-LtmTa401GLLE8EdvEU'), // Google
-    TXT('_github-challenge-arbre-app', 'cdda641101') // GitHub
+    TXT('_github-challenge-arbre-app', 'cdda641101'), // GitHub
+
+    CNAME('ovhmo4424613-selector1._domainkey', 'ovhmo4424613-selector1._domainkey.567927.ko.dkim.mail.ovh.net.'),
+    CNAME('ovhmo4424613-selector2._domainkey', 'ovhmo4424613-selector2._domainkey.567926.ko.dkim.mail.ovh.net.')
 );
