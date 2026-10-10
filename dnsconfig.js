@@ -6,7 +6,6 @@ var OVH = NewDnsProvider('ovh', 'OVH');
 // Common configurations
 
 var WEBSERVER_IPV4 = '145.239.198.62';
-var WEBSERVER_OLD_IPV4 = '51.77.136.165';
 
 var MAILSERVER_CONFIG = [
     MX('@', 1, 'mx1.mail.ovh.net.'),
@@ -30,9 +29,9 @@ DEFAULTS(DefaultTTL('1h'), NAMESERVER_TTL('1h'));
 
 D('arbre.app', REG_OVH, DnsProvider(OVH),
     // Web
-    A('@', WEBSERVER_OLD_IPV4), // Main site
+    A('@', WEBSERVER_IPV4), // Main site
     CNAME('www', '@'),
-    A('insee', WEBSERVER_OLD_IPV4), // API
+    A('insee', WEBSERVER_IPV4), // API
     A('mon', WEBSERVER_IPV4), // SPA
     A('docs', WEBSERVER_IPV4), // Generated files
 
